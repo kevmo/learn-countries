@@ -50,7 +50,6 @@ var SelectCountryTable = React.createClass({
         this.setState({
             countryInFocus: selectedCountry
         });
-        console.log("w00t:", this.state.countryInFocus);
     },
 
     render: function(){
