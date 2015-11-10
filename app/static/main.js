@@ -1,6 +1,6 @@
 var COUNTRIES;
 
-var CountryInFocus = React.createClass({
+var CountryInFocusHeader = React.createClass({
     render: function(){
         return (<h2>{this.props.name}</h2>)
     }
@@ -12,10 +12,11 @@ var CountriesList = React.createClass({
             <ul>
             {this.props.countries.map(function(country, i){
                 return <CountryRow
-                key={i}
-                country={country}
-                onUserInput={onUserInput}/>
-            })}
+                    key={i}
+                    country={country}
+                    onUserInput={this.props.onUserInput}
+                />
+            }, this)}
             </ul>
         )
     }
@@ -33,7 +34,7 @@ var CountryRow = React.createClass({
     }
 });
 
-var CountryBox = React.createClass({
+var CountryInFocusBox = React.createClass({
     render: function(){}
 });
 
@@ -49,16 +50,16 @@ var SelectCountryTable = React.createClass({
         this.setState({
             countryInFocus: selectedCountry
         });
-        console.log("w00t");
+        console.log("w00t:", this.state.countryInFocus);
     },
 
     render: function(){
-        console.log("state", this.state.country_in_focus);
         return (
             <div>
                 <CountriesList
                     countries={this.props.countries}
-                    onUserInput={this.props.onCountrySelect}
+                    countryInFocus={this.state.countryInFocus}
+                    onUserInput={this.onCountrySelect}
                 />
             </div>
         )
