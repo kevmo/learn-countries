@@ -1,5 +1,5 @@
 //
-var countries;
+var COUNTRIES;
 
 var CountryInFocus = React.createClass({
     render: function(){
@@ -11,20 +11,26 @@ var CountriesList = React.createClass({
     render: function(){
         var rows = [];
         this.props.countries.forEach(function(country){
-            
+            rows.push(<CountryRow country={country} />)
         })
+
+        return (
+            <ul>{rows}</ul>
+        )
     }
 });
 
 var CountryRow = React.createClass({
     render: function(){
         return (
-            <li>this.props.country.name</li>
+            <li>{this.props.country.name}</li>
         )
     }
 });
 
-var CountryBox = React.createClass({});
+var CountryBox = React.createClass({
+    render: function(){}
+});
 
 
 var SelectCountryTable = React.createClass({
@@ -35,9 +41,11 @@ var SelectCountryTable = React.createClass({
     },
 
     render: function(){
+        console.log(this.props.countries);
         return (
             <div>
-                <CountryInFocus
+                <CountriesList
+                    countries={this.props.countries}
                 />
             </div>
         )
@@ -47,12 +55,14 @@ var SelectCountryTable = React.createClass({
 
 // Get country data
 $.get('https://restcountries.eu/rest/v1/all', function(resp){
-    countries = resp;
-    console.log(countries);
+    COUNTRIES = resp;
+    console.log("COUNTRIES:");
+    console.dir(COUNTRIES);
+    ReactDOM.render(
+        <SelectCountryTable countries={COUNTRIES} />,
+        document.getElementById('container')
+    );
 });
 
+
 // first take a nap... then fire ze missile!
-ReactDOM.render(
-    <SelectCountryTable countries={countries} />
-    document.getElementById('container')
-);
