@@ -2,7 +2,11 @@ var COUNTRIES;
 
 var CountryInFocusHeader = React.createClass({
     render: function(){
-        return (<h2>{this.props.name}</h2>)
+        if (this.props.country){
+            return (<h2>{this.props.country.name}</h2>)
+        }
+
+        return (<h2></h2>)
     }
 });
 
@@ -55,6 +59,9 @@ var SelectCountryTable = React.createClass({
     render: function(){
         return (
             <div>
+                <CountryInFocusHeader
+                    country={this.state.countryInFocus}
+                />
                 <CountriesList
                     countries={this.props.countries}
                     countryInFocus={this.state.countryInFocus}
@@ -65,12 +72,18 @@ var SelectCountryTable = React.createClass({
     }
 });
 
+COUNTRIES = [{name: "USA"}, {name:"Murica"}, {name: "GOAT"}];
+
+ReactDOM.render(
+    <SelectCountryTable countries={COUNTRIES} />,
+    document.getElementById('container')
+);
 
 // Get country data, then render that DOM!
-$.get('https://restcountries.eu/rest/v1/all', function(resp){
-    COUNTRIES = resp;
-    ReactDOM.render(
-        <SelectCountryTable countries={COUNTRIES} />,
-        document.getElementById('container')
-    );
-});
+// $.get('https://restcountries.eu/rest/v1/all', function(resp){
+//     COUNTRIES = resp;
+//     ReactDOM.render(
+//         <SelectCountryTable countries={COUNTRIES} />,
+//         document.getElementById('container')
+//     );
+// });
