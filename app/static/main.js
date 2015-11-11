@@ -82,14 +82,6 @@ var SelectCountryTable = React.createClass({
     }
 });
 
-// mock for airplane coding!
-// COUNTRIES = [{name: "USA", other: "the United states of AMERICA"},
-//              {name:"Murica", other: "LOVE IT OR LEAVE IT, BUDDY"},
-//              {name: "GOAT", other: "THE GREATEST OF ALL TIME"}];
-// ReactDOM.render(
-//     <SelectCountryTable countries={COUNTRIES} />,
-//     document.getElementById('container')
-// );
 
 // Get country data, then render that DOM!
 $.get('https://restcountries.eu/rest/v1/all', function(resp){
