@@ -39,7 +39,14 @@ var CountryRow = React.createClass({
 });
 
 var CountryInFocusBox = React.createClass({
-    render: function(){}
+    render: function(){
+        if (this.props.country){
+            return (<div>
+                <span>{this.props.country.other}</span>
+            </div>)
+        }
+        return (<div></div>)
+    }
 });
 
 
@@ -67,12 +74,17 @@ var SelectCountryTable = React.createClass({
                     countryInFocus={this.state.countryInFocus}
                     onUserInput={this.onCountrySelect}
                 />
+                <CountryInFocusBox
+                    country={this.state.countryInFocus}
+                />
             </div>
         )
     }
 });
 
-COUNTRIES = [{name: "USA"}, {name:"Murica"}, {name: "GOAT"}];
+COUNTRIES = [{name: "USA", other: "the United states of AMERICA"},
+             {name:"Murica", other: "LOVE IT OR LEAVE IT, BUDDY"},
+             {name: "GOAT", other: "THE GREATEST OF ALL TIME"}];
 
 ReactDOM.render(
     <SelectCountryTable countries={COUNTRIES} />,
